@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.6.RELEASE</version>
+		<relativePath />
+		<!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.esign</groupId>
+	<artifactId>signer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>signer</name>
+	<description>Demo project for Spring Boot</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<baseDir>${project.basedir}</baseDir>
+		<project.build.directory>C:\Users\mujdat.karacan\Development\Java\SmartSigner\target</project.build.directory>
+		
+		<signer-version>2.2.1</signer-version>
+	</properties>
+	
+	<!--<bean id="hello" class="Hello">
+      <property name="message" value="Good Afternoon" />
+        </bean>   -->
+	<dependencies>
+<dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.4.199</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>4.3.11.Final</version>
+</dependency>
+    
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency> 
+
+		<dependency> 
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.4.4.Final</version>
+</dependency> 
+      <dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.2.6</version>
+</dependency>
+<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>slf4j-jdk14</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.6.6</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/slf4j-jdk14-1.6.6.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-asic</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-asic-2.2.1.jar</systemPath>
+			<version>2.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-asn</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-asn-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-certvalidation</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-certvalidation-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-cmssignature</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-cmssignature-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-common</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-common-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-crypto</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-crypto-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-crypto-gnuprovider</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-crypto-gnuprovider-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-sunprovider</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-crypto-sunprovider-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-infra</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-infra-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-cerstore</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-certstore-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-mssclient</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-mssclient-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-pades</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-pades-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-signature</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-signature-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-smartcard</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-smartcard-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>ma3api-xmlsignature</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ma3api-xmlsignature-2.2.1.jar</systemPath>
+			<version>${signer-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>akiscif</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/akiscif-2.6.1.jar</systemPath>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esigner</groupId>
+			<artifactId>asn1rt</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/asn1rt-6.6.4.jar</systemPath>
+			<version>6.6.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>  
+		
+	</dependencies> 
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.esign.signer.SignerApplication</mainClass>
+				
+				</configuration>
+			</plugin>
+			
+		</plugins>
+	</build>
+	<!-- 
+	<build> 
+	<plugins>
+			 <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>1.2.5.RELEASE</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+			
+		</plugins>
+	 
+	  <plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				 <version>1.2.5.RELEASE</version>
+			</plugin> 
+		</plugins> 
+	</build> 
+	
+	 -->
+	
+</project>
