@@ -30,6 +30,7 @@ import java.util.List;
  * Varsayılan olarak karta APDU(Application Protocol Data Unit) erişimini kullanır.
  * APDU:Akıllı kartlar bağlamında, bir uygulama protokolü veri birimi bir akıllı kart okuyucusu
  *  ve bir akıllı kart arasındaki iletişim birimidir
+ *  
  * @author mujdat.karacan
  *
  */

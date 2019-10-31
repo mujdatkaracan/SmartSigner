@@ -1,24 +1,25 @@
 package com.esign.signer.controller;
 
-import com.esign.signer.base.CommonResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController; 
+ 
+import com.esign.signer.base.ServiceResult;
 import com.esign.signer.service.CertificateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping; 
+import org.springframework.web.bind.annotation.RequestParam; 
 
 import tr.gov.tubitak.uekae.esya.api.cmssignature.signature.ESignatureType;
 import tr.gov.tubitak.uekae.esya.api.signature.attribute.CertValidationValues;
-
+ 
 /**
  * CertificateController
  */
 @RestController
 @RequestMapping("certs")
-public class CertificateController extends BaseController {
+public class CertificateController extends BaseController  {
 
 	 
     @Autowired
@@ -42,7 +43,7 @@ public class CertificateController extends BaseController {
             @RequestParam(name = "password") String password, @RequestParam(name = "content") String content,
             @RequestParam(name = "isContentBase64") Boolean isContentBase64) throws Exception {
 
-    	 CommonResult<CertValidationValues> result = service.signPAdES(password, terminal, content);
+    	 ServiceResult<CertValidationValues> result = service.signPAdES(password, terminal, content);
 
         return GenericResponse.createSuccessResponse(result.getData()); 
     }
@@ -54,7 +55,7 @@ public class CertificateController extends BaseController {
             @RequestParam(name = "isContentBase64") Boolean isContentBase64,
             @RequestParam(name = "signatureType") ESignatureType signatureType) throws Exception {
 
-      CommonResult<byte[]> result =  service.sign(password, terminal, content, signatureType);
+      ServiceResult<byte[]> result =  service.sign(password, terminal, content, signatureType);
  
         return GenericResponse.createSuccessResponse(result.getData());
     }
@@ -66,8 +67,8 @@ public class CertificateController extends BaseController {
             @RequestParam(name = "isContentBase64") Boolean isContentBase64,
             @RequestParam(name = "signatureType") ESignatureType signatureType) throws Exception {
 
-        CommonResult<byte[]> result =    service.serialSign(password, terminal, content, signatureType);
+        ServiceResult<byte[]> result =    service.serialSign(password, terminal, content, signatureType);
 
         return GenericResponse.createSuccessResponse(result.getData());
-    }
+    } 
 }

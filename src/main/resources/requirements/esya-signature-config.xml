@@ -48,8 +48,8 @@
              possible certificate types include {QualifiedCertificate, MaliMuhurCertificate, TimeStampingCertificate}
              NOTE THAT ALL THE CERTIFICATES IN SAME CERTIFICATE CHAIN are VALIDATED WITH SAME POLICY
          -->		
-        <certificate-validation-policy-file>./src/main/resources/requirements/certval-policy.xml</certificate-validation-policy-file>
-		<certificate-validation-policy-file for="MaliMuhurCertificate">./src/main/resources/requirements/certval-policy-malimuhur.xml</certificate-validation-policy-file>
+       <certificate-validation-policy-file>certval-policy.xml</certificate-validation-policy-file>
+		<certificate-validation-policy-file for="MaliMuhurCertificate">certval-policy-malimuhur.xml</certificate-validation-policy-file>
 
         <!-- 0 means ignore grace -->
         <grace-period-in-seconds>0</grace-period-in-seconds>

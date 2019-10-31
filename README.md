@@ -1,2 +1,0 @@
-# SmartSigner
-Smart signer application

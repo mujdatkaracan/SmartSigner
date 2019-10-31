@@ -1,5 +1,11 @@
 package com.esign.signer.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.esign.signer.service.CertificateService;
+import com.esign.signer.validation.CadesSignatureValidation;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,19 +15,15 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+
+import com.esign.signer.BaseConfiguration;
 import com.esign.signer.SmartCardManager;
 import com.esign.signer.base.SearchType;
-import com.esign.signer.base.CommonResult;
-import com.esign.signer.enums.CommonResultType;
+import com.esign.signer.base.ServiceResult;
+import com.esign.signer.enums.ServiceResultType;
 import com.esign.signer.model.CertificateModel;
 import com.esign.signer.model.ParameterModel;
-import com.esign.signer.model.TerminalModel;
-import com.esign.signer.service.CertificateService;
-import com.esign.signer.validation.CadesSignatureValidation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
+import com.esign.signer.model.TerminalModel;  
 import tr.gov.tubitak.uekae.esya.api.asn.x509.ECertificate;
 import tr.gov.tubitak.uekae.esya.api.cmssignature.ISignable;
 import tr.gov.tubitak.uekae.esya.api.cmssignature.SignableByteArray;
@@ -41,16 +43,16 @@ import tr.gov.tubitak.uekae.esya.api.signature.config.Config;
 import tr.gov.tubitak.uekae.esya.api.smartcard.pkcs11.CardType;
 import tr.gov.tubitak.uekae.esya.api.smartcard.pkcs11.SmartOp;
 import tr.gov.tubitak.uekae.esya.asn.util.AsnIO;
-
+ 
 /**
  * CertificateServiceImpl
  */
-@Service
+@Component
 public class CertificateServiceImpl implements CertificateService {
 
-	/*@Autowired
+	  @Autowired
 	private CadesSignatureValidation cadesSignatureValidation;
-*/
+  
 	private ParameterModel initializeParameters() {
 		return new ParameterModel("0", SearchType.BY_SLOT_ID);
 
@@ -62,8 +64,8 @@ public class CertificateServiceImpl implements CertificateService {
 	}
 
 	@Override
-	public CommonResult<CertificateModel> getCertificates(String[] terminals, int index) throws Exception {
-		CommonResult<byte[]> result = null;
+	public ServiceResult<CertificateModel> getCertificates(String[] terminals, int index) throws Exception {
+		ServiceResult<byte[]> result = null;
 
 		ParameterModel parameterModel = initializeParameters();
 		SmartCardManager cardManager = SmartCardManager.getInstance(terminals, index);
@@ -97,11 +99,11 @@ public class CertificateServiceImpl implements CertificateService {
 
 		model.setSerial(cert.getSubject().getSerialNumberAttribute());
 
-		return new CommonResult<CertificateModel>(model);
+		return new ServiceResult<CertificateModel>(model);
 	}
 
 	@Override
-	public CommonResult<List<TerminalModel>> getTerminals() throws Exception {
+	public ServiceResult<List<TerminalModel>> getTerminals() throws Exception {
 
 		String[] terminals = getCardTerminals();
 
@@ -126,13 +128,13 @@ public class CertificateServiceImpl implements CertificateService {
 			index++;
 
 		}
-		return new CommonResult<List<TerminalModel>>(terminalList);
+		return new ServiceResult<List<TerminalModel>>(terminalList);
 	}
 
 	@Override
-	public CommonResult<CertValidationValues> signPAdES(String pin, int index, String filePath) throws Exception {
+	public ServiceResult<CertValidationValues> signPAdES(String pin, int index, String filePath) throws Exception {
 
-		CommonResult<CertValidationValues> result = null;
+		ServiceResult<CertValidationValues> result = null;
 		ParameterModel parameterModel = initializeParameters();
 		SmartCardManager cardManager = getSmartCardManager(index);
 
@@ -150,9 +152,9 @@ public class CertificateServiceImpl implements CertificateService {
 			signatureContainer.write(new FileOutputStream(filePath + "_copy"));
 			CertValidationValues arrays = signature.getCertValidationValues();
 			result.setData(arrays);
-			result.setResultType(CommonResultType.SUCCESS);
+			result.setResultType(ServiceResultType.SUCCESS);
 		} catch (Exception e) {
-			result.setResultType(CommonResultType.ERROR);
+			result.setResultType(ServiceResultType.ERROR);
 			result.setException(e);
 		} finally {
 
@@ -163,10 +165,10 @@ public class CertificateServiceImpl implements CertificateService {
 	}
 
 	@Override
-	public CommonResult<byte[]> sign(String pin, int index, String filePath, ESignatureType signatureType)
+	public ServiceResult<byte[]> sign(String pin, int index, String filePath, ESignatureType signatureType)
 			throws Exception { 
 		byte[] signature = null;
-		CommonResult<byte[]> result = new CommonResult<byte[]>(signature); 
+		ServiceResult<byte[]> result = new ServiceResult<byte[]>(signature); 
 		ParameterModel parameterModel = initializeParameters();
 		SmartCardManager cardManager = getSmartCardManager(index);
 
@@ -183,7 +185,7 @@ public class CertificateServiceImpl implements CertificateService {
 			params.put(EParameters.P_EXTERNAL_CONTENT, content);
 
 			params.put(EParameters.P_VALIDATE_CERTIFICATE_BEFORE_SIGNING, false);
-			//params.put(EParameters.P_CERT_VALIDATION_POLICY, cadesSignatureValidation.getPolicy());
+			params.put(EParameters.P_CERT_VALIDATION_POLICY, cadesSignatureValidation.getPolicy());
 
 			baseSignedData.addSigner(signatureType, eCertificate, signer, null, params);
 
@@ -191,9 +193,9 @@ public class CertificateServiceImpl implements CertificateService {
 			//cardManager.logout();
 			// TODO:Cert validate
 
-			//AsnIO.dosyayaz(signature, "C:/ma3api-java-bundle/" + "ASİMAN.p7s");
+			 AsnIO.dosyayaz(signature, "C:/ma3api-java-bundle/" + "AS4444İMAN.p7s");
 			result.setData(signature);
-			result.setResultType(CommonResultType.SUCCESS);
+			result.setResultType(ServiceResultType.SUCCESS);
 		} finally {
 
 			//cardManager.logout();
@@ -222,8 +224,8 @@ public class CertificateServiceImpl implements CertificateService {
 	}
 
 	@Override
-	public CommonResult<byte[]> serialSign(String pin, int index, String filePath, ESignatureType signatureType) throws Exception {
-		CommonResult<byte[]> result = null;
+	public ServiceResult<byte[]> serialSign(String pin, int index, String filePath, ESignatureType signatureType) throws Exception {
+		ServiceResult<byte[]> result = null;
 		ParameterModel parameterModel = initializeParameters();
 		SmartCardManager cardManager = getSmartCardManager(index);
 
@@ -240,7 +242,7 @@ public class CertificateServiceImpl implements CertificateService {
 			HashMap<String, Object> params = new HashMap<String, Object>();
 
 			params.put(EParameters.P_VALIDATE_CERTIFICATE_BEFORE_SIGNING, false);
-			//params.put(EParameters.P_CERT_VALIDATION_POLICY, cadesSignatureValidation.getPolicy());
+			params.put(EParameters.P_CERT_VALIDATION_POLICY, cadesSignatureValidation.getPolicy());
 
 			ECertificate eCertificate = cardManager.getSignatureCertificate(parameterModel, true);
 			BaseSigner signer = cardManager.getSigner(pin, eCertificate);
@@ -251,9 +253,9 @@ public class CertificateServiceImpl implements CertificateService {
 
 			AsnIO.dosyayaz(baseSignedData.getEncoded(), filePath + ".p7s");
 			result.setData(baseSignedData.getEncoded());
-			result.setResultType(CommonResultType.SUCCESS);
+			result.setResultType(ServiceResultType.SUCCESS);
 		} catch (Exception e) {
-			result.setResultType(CommonResultType.ERROR);
+			result.setResultType(ServiceResultType.ERROR);
 			result.setException(e);
 		} finally {
 
@@ -262,13 +264,11 @@ public class CertificateServiceImpl implements CertificateService {
 		return result;
 
 	}
-
-	protected PAdESContext createContext() {
-		PAdESContext c = new PAdESContext();
-	//	PAdESContext c = new PAdESContext(new File("C://ma3api-java-bundle").toURI());
-		c.setConfig(new Config("")); //SampleBase.ROOT_DIR + "/config/esya-signature-config.xml"
-		return c;
-	}
-	
-
+	 protected PAdESContext createContext() {
+	        PAdESContext c = new PAdESContext(new File("/requirements/").toURI());
+	        c.setConfig(new Config("/requirements/esya-signature-config.xml"));
+	        return c;
+	    }
+	 
+	 
 }

@@ -8,7 +8,7 @@ package com.esign.signer.enums;
  * @author mujdat.karacan
  *
  */
-public enum CommonResultType {
+public enum ServiceResultType {
 	/**
 	 * İşlem Başarılı bilgisi
 	 */
@@ -21,7 +21,7 @@ public enum CommonResultType {
 	private int type;
 	private String message;
 
-	CommonResultType(int resultType, String message) {
+	ServiceResultType(int resultType, String message) {
 		this.type = resultType;
 		this.message = message;
 	}

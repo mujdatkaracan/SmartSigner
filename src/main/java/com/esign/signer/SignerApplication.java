@@ -1,13 +1,18 @@
 package com.esign.signer;
  
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.SpringApplication; 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;  
 
-
-//@ComponentScan("com.esign.signer") 
+/**
+ *SignerApplication.java sınıfı main sınıfıdır.
+ *Uygulamayı ayağa kaldırır.@ComponentScan anotasyonu sayesinde componentleri hangi dizinden itibaren tarayacağını söylüyoruz.
+ * 
+ * @author mujdat.karacan
+ *
+ */
+@ComponentScan(basePackages =  "com.esign") 
 //@EnableAutoConfiguration
 @SpringBootApplication
 public class SignerApplication {
@@ -17,8 +22,7 @@ public class SignerApplication {
 		System.out.println("-----------------SİGNER APP START-------------------");
 		SpringApplication.run(SignerApplication.class, args);
 
-		System.out.println("-----------------SİGNER APP RUN-------------------");
-		// SampleBase.init();
+		System.out.println("-----------------SİGNER APP RUN-------------------"); 
 	}
  
 }

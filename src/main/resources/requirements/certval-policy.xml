@@ -2,10 +2,9 @@
 <policy>
     <find>
         <trustedcertificate>
-            <class name="tr.gov.tubitak.uekae.esya.api.certificate.validation.find.certificate.trusted.TrustedCertificateFinderFromECertStore"/>
-            <!--class name="tr.gov.tubitak.uekae.esya.api.certificate.validation.find.certificate.trusted.TrustedCertificateFinderFromFileSystem">
-                <param name="dizin" value="path\to\trusted certificates"/>
-            </class-->
+          <class name="tr.gov.tubitak.uekae.esya.api.certificate.validation.find.certificate.trusted.TrustedCertificateFinderFromECertStore">
+                <param name="storepath" value="SertifikaDeposu.svt"/>
+              </class>
         </trustedcertificate>
         <certificate>
             <class name="tr.gov.tubitak.uekae.esya.api.certificate.validation.find.certificate.CertificateFinderFromECertStore"/>
